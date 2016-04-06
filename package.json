@@ -1,0 +1,12 @@
+{
+  "name": "z-Cluster-httpd",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node httpd.js"
+  },
+  "dependencies": {
+    "express":  "4.11.x",
+    "socket.io": "latest"
+  }
+}
