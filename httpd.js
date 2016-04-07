@@ -23,7 +23,7 @@ io.on('connection', function(socket){
         //    if (err) throw err;
         //    console.log(stdout);
         //});
-        shell.exec("echo hello " + term);
+        shell.exec("echo jekins hello " + term);
     });
 });
 
