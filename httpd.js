@@ -23,10 +23,22 @@ io.on('connection', function(socket){
         //    if (err) throw err;
         //    console.log(stdout);
         //});
-        shell.exec("echo jekins hello fifth time " + term);
+        shell.exec("echo cloudmatrix has deployed a container of  " + term);
+
+        shell.exec("./grabConInfo.sh");
+
+        var containers = require("./containers.json");
+        var t = containers[getRandomInRange(0, containers.length-1, 0)];
+        console.log(t);
+        socket.emit("containers", t);
     });
 });
 
 http.listen(10002, function(){
     console.log('listening on *:10002');
 });
+
+
+function getRandomInRange(from, to ,fixed) {
+  return (Math.random()*(to-from)+from).toFixed(fixed)*1;
+}
