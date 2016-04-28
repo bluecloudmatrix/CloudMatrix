@@ -24,7 +24,7 @@ io.on('connection', function(socket){
         //    console.log(stdout);
         //});
 
-        shell.exec("docker run -d -P mymongodb");
+        //shell.exec("docker run -d -P mymongodb");
         //shell.exec("./lparctl.sh create -f hello.json");
 
 
