@@ -24,12 +24,13 @@ io.on('connection', function(socket){
         //    console.log(stdout);
         //});
 
-        //shell.exec("docker run -d -P --name mongo_001 mymongodb");
+        shell.exec("docker run -d -P mymongodb");
         //shell.exec("./lparctl.sh create -f hello.json");
+
 
         shell.exec("echo cloudmatrix has deployed a container of  " + term);
 
-        shell.exec("./grabConInfo.sh");
+        shell.exec("./grabContainersInfo.sh");
 
         var containers = require("./containers.json");
         var t = containers[getRandomInRange(0, containers.length-1, 0)];
