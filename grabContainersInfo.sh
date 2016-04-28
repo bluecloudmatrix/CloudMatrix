@@ -32,11 +32,11 @@ generateitem()
 	jsonitem="{\"$key0\":\"$1\", \"$key1\":\"$2\", \"$key2\":\"$3\", \"$key3\":\"$4\", \"$key4\":\"$5\", \"$key5\":\"$6\", \"$key6\":\"$7\"}"
 	
 	echo $jsonitem
-	if [$8 -lt $number_of_containers]
+	if [ $8 -lt $number_of_containers ]
 	then
 		jsonitem=$jsonitem","
 	fi
-	echo $jsonitem > $containersjson
+	echo $jsonitem >> $containersjson
 }
 
 container=0
@@ -52,7 +52,7 @@ do
 	readitem $container 6; container_port=$item
 	readitem $container 7; container_name=$item
 	
-	if [$container -eq 1]
+	if [ "$container" -eq 1 ]
 	then
 		key0=$container_id
 		key1=$container_image
@@ -61,7 +61,8 @@ do
 		key4=$container_stat
 		key5=$container_port
 		key6=$container_name
-		echo "[" > $containersjson		
+		echo "[" >> $containersjson
+		continue		
 	fi
 
 	echo $container_id
@@ -72,11 +73,15 @@ do
 	echo $container_port
 	echo $container_name
 
+	container_cmd="xxx"
+	createdate="xxx"
+	container_stat="healthy"
+	container_port="xxx"
 	generateitem $container_id $container_image $container_cmd $createdate $container_stat $container_port $container_name $container
 	
-	if [$container -eq $number_of_containers]
+	if [ $container -eq $number_of_containers ]
 	then
-		echo "]" > $containerjson
+		echo "]" >> $containersjson
 	fi
 
 done

@@ -1,1 +1,5 @@
-{"":"b4f0b5a21e45", "":"mymongodb", "":""mongod"", "":"9", "":"days", "":"ago", "":"Up"}
+[
+{"CONTAINER ID":"108efa7a4274", "IMAGE":"google/cadvisor:latest", "COMMAND":"xxx", "":"xxx", "STATUS":"healthy", "PORTS":"xxx", "NAMES":"cadvisor"},
+{"CONTAINER ID":"9d48f87edce2", "IMAGE":"swarm", "COMMAND":"xxx", "":"xxx", "STATUS":"healthy", "PORTS":"xxx", "NAMES":"goofy_einstein"},
+{"CONTAINER ID":"b4f0b5a21e45", "IMAGE":"mymongodb", "COMMAND":"xxx", "":"xxx", "STATUS":"healthy", "PORTS":"xxx", "NAMES":"mongo_001"}
+]
