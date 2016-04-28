@@ -7,7 +7,7 @@ docker ps > linuxshell.cfg
 
 containersfile=linuxshell.cfg
 number_of_containers=$(cat $containersfile | grep -v "^\s*#" | sed -e 's/  \+/|/g' | wc -l)
-echo $number_of_containers
+#echo $number_of_containers
 item=""
 
 containersjson=containers.json
@@ -31,7 +31,7 @@ generateitem()
 {
 	jsonitem="{\"$key0\":\"$1\", \"$key1\":\"$2\", \"$key2\":\"$3\", \"$key3\":\"$4\", \"$key4\":\"$5\", \"$key5\":\"$6\", \"$key6\":\"$7\"}"
 	
-	echo $jsonitem
+	#echo $jsonitem
 	if [ $8 -lt $number_of_containers ]
 	then
 		jsonitem=$jsonitem","
@@ -43,7 +43,7 @@ container=0
 while [[ $container -lt $number_of_containers ]]
 do
 	container=$(($container+1))
-	echo "container="$container
+	#echo "container="$container
 	readitem $container 1; container_id=$item
 	readitem $container 2; container_image=$item
 	readitem $container 3; container_cmd=$item
@@ -65,18 +65,21 @@ do
 		continue		
 	fi
 
-	echo $container_id
-	echo $container_image
-	echo $container_cmd
-	echo $createdate
-	echo $container_stat
-	echo $container_port
-	echo $container_name
+	#echo $container_id
+	#echo $container_image
+	#echo $container_cmd
+	#echo $createdate
+	#echo $container_stat
+	#echo $container_port
+	#echo $container_name
 
 	container_cmd="xxx"
-	createdate="xxx"
-	container_stat="healthy"
-	container_port="xxx"
+	#createdate="xxx"
+	container_stat="Running"
+	#container_port="xxx"
+	createdate=`docker inspect $container_id | grep "\"Created\"" |cut -d '"' -f4`
+	
+
 	generateitem $container_id $container_image $container_cmd $createdate $container_stat $container_port $container_name $container
 	
 	if [ $container -eq $number_of_containers ]
