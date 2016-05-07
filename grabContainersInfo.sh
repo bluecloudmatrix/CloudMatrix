@@ -3,6 +3,8 @@
 echo "info from docker ps"
 echo "generate containers.json"
 
+rm containers.json
+
 docker ps > linuxshell.cfg
 
 containersfile=linuxshell.cfg
@@ -57,7 +59,8 @@ do
 		key0=$container_id
 		key1=$container_image
 		key2=$container_cmd
-		key3=$cteatedate
+		#key3=$cteatedate
+		key3="CREATED"
 		key4=$container_stat
 		key5=$container_port
 		key6=$container_name

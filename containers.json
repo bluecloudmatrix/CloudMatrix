@@ -1,5 +1,5 @@
 [
-{"CONTAINER ID":"108efa7a4274", "IMAGE":"google/cadvisor:latest", "COMMAND":"xxx", "":"2016-04-20T05:42:53.627533746Z", "STATUS":"Running", "PORTS":"0.0.0.0:8080->8080/tcp", "NAMES":"cadvisor"},
-{"CONTAINER ID":"9d48f87edce2", "IMAGE":"swarm", "COMMAND":"xxx", "":"2016-04-20T03:21:08.699656495Z", "STATUS":"Running", "PORTS":"0.0.0.0:2376->2375/tcp", "NAMES":"goofy_einstein"},
-{"CONTAINER ID":"b4f0b5a21e45", "IMAGE":"mymongodb", "COMMAND":"xxx", "":"2016-04-18T05:44:27.650778142Z", "STATUS":"Running", "PORTS":"0.0.0.0:32768->27017/tcp", "NAMES":"mongo_001"}
+{"CONTAINER ID":"108efa7a4274", "IMAGE":"google/cadvisor:latest", "COMMAND":"xxx", "CREATED":"2016-04-20T05:42:53.627533746Z", "STATUS":"Running", "PORTS":"0.0.0.0:8080->8080/tcp", "NAMES":"cadvisor"},
+{"CONTAINER ID":"9d48f87edce2", "IMAGE":"swarm", "COMMAND":"xxx", "CREATED":"2016-04-20T03:21:08.699656495Z", "STATUS":"Running", "PORTS":"0.0.0.0:2376->2375/tcp", "NAMES":"goofy_einstein"},
+{"CONTAINER ID":"b4f0b5a21e45", "IMAGE":"mymongodb", "COMMAND":"xxx", "CREATED":"2016-04-18T05:44:27.650778142Z", "STATUS":"Running", "PORTS":"0.0.0.0:32768->27017/tcp", "NAMES":"mongo_001"}
 ]
