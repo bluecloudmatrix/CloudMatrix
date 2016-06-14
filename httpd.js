@@ -11,15 +11,16 @@ var io = require('socket.io')(http);
 var shell = require("shelljs");
 
 app.get('/', function(req, res){
-    res.send('<h1>z-Cluster Realtime Server</h1>');
+    res.send('<h1>The Docker Cloud Realtime Server</h1>');
 });
 
 io.on('connection', function(socket){
     console.log('a user connected');
     socket.on("deploy", function(data) {
-        //var term = data.toLowerCase();
-        //console.log("deploy term: " + term);
-        console.log("receiving data: " + data);
+        //var term = JSON.stringify(data);
+	//console.log("receiving data: " + term);
+	//console.log("receiving data: " + data.timestamp);
+	
 	//var child = exec('echo hello ' + term, function(err, stdout, stderr) {
         //    if (err) throw err;
         //    console.log(stdout);
@@ -36,7 +37,10 @@ io.on('connection', function(socket){
         var containers = require("./containers.json");
         var t = containers[getRandomInRange(0, containers.length-1, 0)];
         console.log(t);
-        socket.emit("serverResponse", t);
+	data.text = t;
+	var tt = JSON.stringify(data);
+	console.log("changed data: " + tt);
+        socket.emit("serverResponse", data);
     });
 });
 
