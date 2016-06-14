@@ -17,9 +17,10 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
     console.log('a user connected');
     socket.on("deploy", function(data) {
-        var term = data.toLowerCase();
-        console.log("deploy term: " + term);
-        //var child = exec('echo hello ' + term, function(err, stdout, stderr) {
+        //var term = data.toLowerCase();
+        //console.log("deploy term: " + term);
+        console.log("receiving data: " + data);
+	//var child = exec('echo hello ' + term, function(err, stdout, stderr) {
         //    if (err) throw err;
         //    console.log(stdout);
         //});
@@ -28,14 +29,14 @@ io.on('connection', function(socket){
         //shell.exec("./lparctl.sh create -f hello.json");
 
 
-        shell.exec("echo cloudmatrix has deployed a container of  " + term);
+        //shell.exec("echo cloudmatrix has deployed a container of  " + term);
 
         shell.exec("./grabContainersInfo.sh");
 
         var containers = require("./containers.json");
         var t = containers[getRandomInRange(0, containers.length-1, 0)];
         console.log(t);
-        socket.emit("containers", t);
+        socket.emit("serverResponse", t);
     });
 });
 
