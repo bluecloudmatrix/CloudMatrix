@@ -35,13 +35,21 @@ io.on('connection', function(socket){
         shell.exec("./grabContainersInfo.sh");
 
         var containers = require("./containers.json");
-        var t = containers[getRandomInRange(0, containers.length-1, 0)];
-        console.log(t);
-	data.text = t;
+        //var t = containers[getRandomInRange(0, containers.length-1, 0)];
+        console.log(containers);
+	data.text = containers;
 	var tt = JSON.stringify(data);
 	console.log("changed data: " + tt);
         socket.emit("serverResponse", data);
     });
+
+    socket.on("services", function(data) {
+        shell.exec("./grabContainersInfo.sh");
+	var containers = require("./containers.json");
+	data.text = containers;
+	socket.emit("servicesListing", data);    
+    });
+
 });
 
 http.listen(10002, function(){
