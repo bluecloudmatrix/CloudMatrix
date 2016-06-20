@@ -33,13 +33,10 @@ io.on('connection', function(socket){
         //shell.exec("echo cloudmatrix has deployed a container of  " + term);
 
         shell.exec("./grabContainersInfo.sh");
-
         var containers = require("./containers.json");
-        //var t = containers[getRandomInRange(0, containers.length-1, 0)];
-        console.log(containers);
-	data.text = containers;
-	var tt = JSON.stringify(data);
-	console.log("changed data: " + tt);
+        var t = containers[getRandomInRange(0, containers.length-1, 0)];
+	console.log(t);
+  	data.text = t;
         socket.emit("serverResponse", data);
     });
 
