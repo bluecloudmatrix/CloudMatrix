@@ -5,6 +5,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var fs = require('fs');
 
 //var exec = require('child_process').exec;
 
@@ -29,20 +30,23 @@ io.on('connection', function(socket){
         //shell.exec("docker run -d -P mymongodb");
         //shell.exec("./lparctl.sh create -f hello.json");
 
-
-        //shell.exec("echo cloudmatrix has deployed a container of  " + term);
+	//console.log(data.text.service_name);
+	//console.log(data.text.image_name);
+	fs.writeFileSync('./JSON/createTmp.json', JSON.stringify(data.text));	
+	shell.exec("./onectl.sh create -f ./JSON/createTmp.json");	
+	
 
         shell.exec("./grabContainersInfo.sh");
-        var containers = require("./containers.json");
+        var containers = require("./JSON/containers.json");
         var t = containers[getRandomInRange(0, containers.length-1, 0)];
-	console.log(t);
+	//console.log(t);
   	data.text = t;
         socket.emit("serverResponse", data);
     });
 
     socket.on("services", function(data) {
         shell.exec("./grabContainersInfo.sh");
-	var containers = require("./containers.json");
+	var containers = require("./JSON/containers.json");
 	data.text = containers;
 	socket.emit("servicesListing", data);    
     });

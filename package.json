@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "4.11.x",
     "shelljs": "^0.6.0",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "fs": "latest"
   }
 }

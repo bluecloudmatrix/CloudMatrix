@@ -1,3 +1,0 @@
-[
-{"Name":"mymongodb", "Image":"mongodb:latest", "Port":"32770", "BuildDate":"2016-4-20"}
-]

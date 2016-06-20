@@ -3,6 +3,7 @@
 echo "info from docker ps"
 echo "generate containers.json"
 
+cd ./JSON
 rm containers.json
 
 docker ps > linuxshell.cfg
