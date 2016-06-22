@@ -15,6 +15,14 @@ app.get('/', function(req, res){
     res.send('<h1>The Docker Cloud Realtime Server</h1>');
 });
 
+function sleep(time, callback) {
+    var stop = new Date().getTime();
+    while(new Date().getTime() < stop + time) {
+        ;
+    }
+    callback();
+}
+
 io.on('connection', function(socket){
     console.log('a user connected');
     socket.on("deploy", function(data) {
@@ -33,12 +41,19 @@ io.on('connection', function(socket){
 	//console.log(data.text.service_name);
 	//console.log(data.text.image_name);
 	fs.writeFileSync('./JSON/createTmp.json', JSON.stringify(data.text));	
-	shell.exec("./onectl.sh create -f ./JSON/createTmp.json");	
+	//shell.exec("./onectl.sh create -f ./JSON/createTmp.json");	
+	shell.exec("./onectl");	
+	//sleep(1000, function() {
+   	// executes after one second, and blocks the thread
+   	//});
+   
 	
-
         shell.exec("./grabContainersInfo.sh");
-        var containers = require("./JSON/containers.json");
-        var t = containers[getRandomInRange(0, containers.length-1, 0)];
+        	
+	delete require.cache[require.resolve("./JSON/containers.json")];
+	var containers = require("./JSON/containers.json");
+        //var t = containers[getRandomInRange(0, containers.length-1, 0)];
+	var t = containers[0];
 	//console.log(t);
   	data.text = t;
         socket.emit("serverResponse", data);
@@ -46,11 +61,22 @@ io.on('connection', function(socket){
 
     socket.on("services", function(data) {
         shell.exec("./grabContainersInfo.sh");
+	delete require.cache[require.resolve("./JSON/containers.json")];
 	var containers = require("./JSON/containers.json");
+	console.log(containers);
 	data.text = containers;
 	socket.emit("servicesListing", data);    
     });
 
+    socket.on("remove", function(data) {
+	shell.exec("./removeContainer");
+	shell.exec("rm -rf /var/lib/docker/volumes/*");	
+        shell.exec("./grabContainersInfo.sh");
+	delete require.cache[require.resolve("./JSON/containers.json")];
+	var containers = require("./JSON/containers.json");
+	data.text = containers;
+	socket.emit("removeListing", data);    
+    });
 });
 
 http.listen(10002, function(){
