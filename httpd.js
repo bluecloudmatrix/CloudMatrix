@@ -66,7 +66,26 @@ io.on('connection', function(socket){
 	console.log(password);
 	shell.exec("htpasswd -b /data/progrmas/docker/nginx/registry.password " + username + " " + password);	
 	socket.emit("signStatus", "success");
-    });    
+    });   
+
+    socket.on("ownimages", function(data) {
+	var images =  new Array();
+
+	var username = data.username;
+	shell.exec("./grabRegistryImages.sh -u "+username);
+	var all = require("./JSON/"+username+".json");
+	for (x in all.repositories)
+	{
+		var tempArr = all.repositories[x].split("/");
+		if(tempArr[0] == username) {
+			var item = {};
+			item.imagename = all.repositories[x];
+			item.tag = "latest";
+			images.push(item);
+		}
+	}
+	socket.emit("imagesList", images);
+    }); 
 
     socket.on("services", function(data) {
         shell.exec("./grabContainersInfo.sh");
