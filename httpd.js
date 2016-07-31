@@ -58,6 +58,15 @@ io.on('connection', function(socket){
   	data.text = t;
         socket.emit("serverResponse", data);
     });
+	
+    socket.on("sign", function(data) {
+        var username = data.username;
+	var password = data.password;
+	console.log(username);
+	console.log(password);
+	shell.exec("htpasswd -b /data/progrmas/docker/nginx/registry.password " + username + " " + password);	
+	socket.emit("signStatus", "success");
+    });    
 
     socket.on("services", function(data) {
         shell.exec("./grabContainersInfo.sh");

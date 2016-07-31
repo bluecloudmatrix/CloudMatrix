@@ -1,1 +1,1 @@
-{"service_name":"hellomongodb","image_name":"mymongodb","memory_setting":"0","link_to":""}
+{"service_name":"mongo_002","image_name":"mymongodb","memory_setting":"0","link_to":""}
